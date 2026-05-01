@@ -1,6 +1,7 @@
 <script lang="ts">
   import { auth } from '$lib/auth.svelte';
   import { toast } from '$lib/toast.svelte';
+  import { goto } from '$app/navigation';
 </script>
 
 <h1>Welcome</h1>
@@ -14,6 +15,12 @@
   <p>You are not signed in.</p>
 {/if}
 
+<nav>
+  <button type="button" class="quote-button" onclick={() => goto('/quote')}>
+    Get a Quote →
+  </button>
+</nav>
+
 <article>
   <header><strong>Next steps</strong></header>
   <ol>
@@ -25,3 +32,24 @@
     <button type="button" onclick={() => toast.success('Toasts work!')}>Try a toast</button>
   </footer>
 </article>
+
+<style>
+  nav {
+    margin: 2rem 0;
+  }
+  
+  .quote-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .quote-button:hover {
+    background-color: #0056b3;
+  }
+</style>
