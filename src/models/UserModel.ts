@@ -11,8 +11,11 @@ async function getUserById(userId: string): Promise<User | null> {
   return userRepository.findOne({ where: { userId } });
 }
 
-async function addUser(name: string, email: string, passwordHash: string): Promise<User> {
-  const newUser = userRepository.create({ name, email, passwordHash });
+async function addUser(email: string, passwordHash: string): Promise<User> {
+  const newUser = new User();
+  newUser.email = email;
+  newUser.passwordHash = passwordHash;
+
   return userRepository.save(newUser);
 }
 
