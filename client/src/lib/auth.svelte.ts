@@ -26,6 +26,10 @@ class AuthStore {
     this.user = user;
   }
 
+  fetchUser(): void {
+    api.get<User>('/api/me');
+  }
+
   get isLoggedIn(): boolean {
     return this.user !== null;
   }

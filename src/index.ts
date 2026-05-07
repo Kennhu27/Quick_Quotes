@@ -10,7 +10,7 @@ import {
   updateQuotePickup,
   updateQuoteThinSet,
 } from './controllers/QuoteController.js';
-import { loginUser, registerUser } from './controllers/users.js';
+import { loginUser, logOut, registerUser } from './controllers/users.js';
 import { sessionMiddleware } from './sessionConfig.js';
 
 const app: Express = express();
@@ -49,6 +49,7 @@ app.patch('/api/quotes/:quoteId/thinset', updateQuoteThinSet);
 app.post('/api/quotes/:quoteId/calculate', submitAndCalculateQuote);
 app.post('/api/users/registerUser', registerUser);
 app.post('/api/users/loginUser', loginUser);
+app.delete('/api/sessions', logOut);
 // Register your routes below this line (prefix with `/api`)
 
 // Returns the signed-in user (or 401). The frontend's auth store

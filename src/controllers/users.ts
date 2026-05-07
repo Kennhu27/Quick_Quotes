@@ -49,12 +49,12 @@ export async function loginUser(req: Request, res: Response): Promise<void> {
     return;
   }
 
-  const { email, password, passwordHash } = result.data;
+  const { name, email, password, passwordHash } = result.data;
 
   try {
     const loginMatch = await argon2.verify(passwordHash, password);
     if (loginMatch) {
-      const user = await login(email, password, passwordHash);
+      const user = await login(name, email, password, passwordHash);
       console.log(user);
       await req.session.clearSession();
 
@@ -74,4 +74,9 @@ export async function loginUser(req: Request, res: Response): Promise<void> {
     const databaseErrorMessage = parseDatabaseError(err);
     res.status(500).json(databaseErrorMessage);
   }
+}
+
+export async function logOut(req: Request, res: Response): Promise<void> {
+  await req.session.clearSession();
+  res.sendStatus(204); // 204 No Content — successful, nothing to return
 }

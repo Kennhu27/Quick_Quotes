@@ -25,8 +25,14 @@ async function getUserByEmail(email: string): Promise<User | null> {
   return userRepository.findOne({ where: { email } });
 }
 
-async function login(email: string, password: string, passwordHash: string): Promise<User> {
+async function login(
+  name: string,
+  email: string,
+  password: string,
+  passwordHash: string,
+): Promise<User> {
   const user = getUserByEmail(email);
+  (await user).name = name;
   (await user).email = email;
   (await user).password = password;
   (await user).passwordHash = passwordHash;

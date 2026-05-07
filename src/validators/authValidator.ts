@@ -8,6 +8,7 @@ export const RegistrationSchema = z.object({
 });
 
 export const LoginSchema = z.object({
+  name: z.string(),
   email: z.email(),
   password: z.string().min(8).max(64),
   passwordHash: z.string(),
